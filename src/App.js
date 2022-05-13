@@ -20,10 +20,25 @@ function App() {
     setNotes([newNote, ...notes]);
   };
 
+  const onUpdateNote = (updateNote) => {
+    const udpateNotesArray = notes.map((note) => {
+      if(note.id === activeNote) {
+        return updateNote;
+      }
+
+      return note;
+
+    });
+
+    setNotes(udpateNotesArray);
+
+  }
+
+
   const onDeleteNote = (idToDelete) => {
     setNotes(notes.filter((note) => note.id !== idToDelete));
     
-  }
+  };
 
 
   const getActiveNote = () => {
@@ -33,8 +48,16 @@ function App() {
   return (
     <div className="App">
       
-      <Sidebar notes={notes} onAddNote={onAddNote} onDeleteNote={onDeleteNote}  activeNote={activeNote} setActiveNote={setActiveNote}/>
-      <Main activeNote={activeNote} />
+      <Sidebar 
+      notes={notes} 
+      onAddNote={onAddNote} 
+      onDeleteNote={onDeleteNote}  
+      activeNote={activeNote} 
+      setActiveNote={setActiveNote}/>
+
+      <Main 
+      activeNote={activeNote} 
+      onUpdateNote={onUpdateNote} />
     
     </div>
   );
